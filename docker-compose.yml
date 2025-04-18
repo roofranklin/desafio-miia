@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: miia_db
+    environment:
+      POSTGRES_USER: miia_user
+      POSTGRES_PASSWORD: miia_pass
+      POSTGRES_DB: miia_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: miia_api
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://miia_user:miia_pass@db:5432/miia_db
+
+volumes:
+  postgres_data:
