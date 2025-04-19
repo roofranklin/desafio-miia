@@ -63,8 +63,12 @@ Depois que o projeto estiver rodando:
   docker compose exec web pytest
 ```
 
+---
+
 ## Modelagem do banco de dados
 Clique [aqui](database-model.md) para visualizar a modelagem completa.
+
+---
 
 ## Especificação de API REST
 | Método | Rota                            | Descrição                                             |
@@ -78,6 +82,8 @@ Clique [aqui](database-model.md) para visualizar a modelagem completa.
 | GET    | /questoes/sorteio?tipo=objetiva | Sorteia questões de um tipo específico                |
 
 Conforme mencionado acima a documentação completa dos endpoints está em http://localhost:8000/docs
+
+---
 
 ## Estrutura de pastas simplificada
 ```bash
@@ -102,5 +108,7 @@ app/
 ├── requirements.txt
 └── .env
 ```
+
+---
 
 ### Desenvolvido por [Roosevelt Franklin](https://rcode.com.br)
