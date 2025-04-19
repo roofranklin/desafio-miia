@@ -66,20 +66,37 @@ Depois que o projeto estiver rodando:
 ## Modelagem do banco de dados
 Clique [aqui](database-model.md) para visualizar a modelagem completa.
 
+## Especificação de API REST
+| Método | Rota                            | Descrição                                             |
+|--------|---------------------------------|-------------------------------------------------------|
+| GET    | /alunos/{id}/atividades         | Listar histórico de atividades do aluno               |
+| POST   | /atividades/iniciar             | Criar nova atividade para o aluno                     |
+| GET    | /atividades/{id}                | Ver detalhes de uma atividade (respostas e correções) |
+| POST   | /atividades/{id}/respostas      | Enviar respostas da atividade                         |
+| POST   | /atividades/{id}/finalizar      | Finaliza atividade, dispara correção e notificação    |
+| GET    | /temas-redacao/sorteio          | Sorteia tema de redação                               |
+| GET    | /questoes/sorteio?tipo=objetiva | Sorteia questões de um tipo específico                |
+
+Conforme mencionado acima a documentação completa dos endpoints está em http://localhost:8000/docs
+
 ## Estrutura de pastas simplificada
 ```bash
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── models.py
-│   ├── schemas.py
-│   ├── database.py
-│   └── routers/
-│       ├── __init__.py
-│       └── activities.py
-├── tests/
-│   ├── __init__.py
-│   └── test_activities.py
+app/
+├── main.py
+├── database.py
+├── models/
+│   └── __init__.py
+│   └── student.py
+│   └── activity.py
+├── schemas/
+│   └── student.py
+│   └── activity.py
+├── routers/
+│   └── student.py
+│   └── activity.py
+└── tests/
+│   └── test_student.py
+│   └── test_activity.py
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt
