@@ -39,7 +39,7 @@ Abaixo está o modelo relacional de banco de dados para a plataforma de estudos 
 
 ---
 
-## 🔘 Alternativa (para questões objetivas)
+## 🔘 Alternativa (para questões do tipo objetivas)
 
 | Campo          | Tipo     | Descrição                        |
 |----------------|----------|----------------------------------|
@@ -51,7 +51,7 @@ Abaixo está o modelo relacional de banco de dados para a plataforma de estudos 
 
 ---
 
-## 📄 ItemDiscursivo (para questões discursivas)
+## 📄 Discursiva (para questões do tipo discursivas)
 
 | Campo       | Tipo     | Descrição                          |
 |-------------|----------|------------------------------------|
@@ -63,7 +63,7 @@ Abaixo está o modelo relacional de banco de dados para a plataforma de estudos 
 
 ---
 
-## 🧠 TemaRedacao
+## 🧠 Redacao (para questões do tipo redação)
 
 | Campo        | Tipo     | Descrição                          |
 |--------------|----------|------------------------------------|
@@ -71,6 +71,7 @@ Abaixo está o modelo relacional de banco de dados para a plataforma de estudos 
 | titulo       | string   | Nome do tema                       |
 | enunciado    | text     | Texto motivador ou introdutório    |
 | resposta     | text     | Resposta do aluno (subitem) / null |
+| feedback     | text     | Feedback da IA ao aluno            |
 | nota         | float    | Nota do aluno / null               |
 
 ---

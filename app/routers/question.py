@@ -1,22 +1,27 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends,HTTPException
 from sqlalchemy.orm import Session
-from typing import List
+from app import models, schemas
+from app.database import get_db
 
-from .. import models, schemas, database
+router = APIRouter(prefix="/question")
+@router.get("s/{activity_id}", response_model=list[schemas.QuestionResponse])
+def get_questions(activity_id: int, db: Session = Depends(get_db)):
+    return db.query(models.Question).filter(models.Question.activity_id == activity_id).all()
 
-router = APIRouter(prefix="/questions", tags=["Questions"])
+@router.get("/{id}", response_model=schemas.QuestionResponse)
+def get_question(id: int, db: Session = Depends(get_db)):
+    question = db.query(models.Question).filter(models.Question.id == id).first()
+    if not question:
+        raise HTTPException(status_code=404, detail="Questão não encontrada")
+    return question
 
-@router.post("/", response_model=schemas.question.QuestionOut)
-def create_question(question: schemas.question.QuestionCreate, activity_id: int, db: Session = Depends(database.get_db)):
-    activity = db.query(models.activity.Activity).filter_by(id=activity_id).first()
-    if not activity:
-        raise HTTPException(status_code=404, detail="Activity not found")
-    new_question = models.question.Question(**question.dict(), activity_id=activity_id)
-    db.add(new_question)
+@router.post("/{id}", response_model=schemas.AnswerResponse)
+def submit_answer(id: int, data: schemas.AnswerCreate, db: Session = Depends(get_db)):
+    question = db.query(models.Question).filter(models.Question.id == id).first()
+    if not question:
+        raise HTTPException(status_code=404, detail="Questão não encontrada")
+    answer = models.Answer(**data.dict())
+    db.add(answer)
     db.commit()
-    db.refresh(new_question)
-    return new_question
-
-@router.get("/", response_model=List[schemas.question.QuestionOut])
-def list_questions(db: Session = Depends(database.get_db)):
-    return db.query(models.question.Question).all()
+    db.refresh(answer)
+    return answer

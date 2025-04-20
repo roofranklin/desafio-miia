@@ -73,13 +73,14 @@ Clique [aqui](database-model.md) para visualizar a modelagem completa.
 ## Especificação de API REST
 | Método | Rota                            | Descrição                                             |
 |--------|---------------------------------|-------------------------------------------------------|
-| GET    | /alunos/{id}/atividades         | Listar histórico de atividades do aluno               |
-| POST   | /atividades/iniciar             | Criar nova atividade para o aluno                     |
-| GET    | /atividades/{id}                | Ver detalhes de uma atividade (respostas e correções) |
-| POST   | /atividades/{id}/respostas      | Enviar respostas da atividade                         |
-| POST   | /atividades/{id}/finalizar      | Finaliza atividade, dispara correção e notificação    |
-| GET    | /temas-redacao/sorteio          | Sorteia tema de redação                               |
-| GET    | /questoes/sorteio?tipo=objetiva | Sorteia questões de um tipo específico                |
+| POST   | /auth                           | Aluno autenticar na plataforma                        |
+| GET    | /activity/{id}                  | Detalhes de uma atividade                             |
+| GET    | /activities/{student_id}        | Lista de atividades de um aluno                       |
+| GET    | /question/{id}                  | Detalhes de uma questão                               |
+| GET    | /questions/{activity_id}        | Lista questões de uma atividade                       |
+| POST   | /question/{id}                  | Envia a resposta de uma questão                       |
+| PATCH  | /activity/{id}                  | Salva as alterações do andamento da atividade         |
+| POST   | /activity/{id}                  | Envia todas as respostas e conclui a atividade        |
 
 Conforme mencionado acima a documentação completa dos endpoints está em http://localhost:8000/docs
 
@@ -95,11 +96,14 @@ app/
 │   └── student.py
 │   └── activity.py
 │   └── question.py
+│   └── answers.py
 ├── schemas/
 │   └── student.py
 │   └── activity.py
 │   └── question.py
+│   └── answers.py
 ├── routers/
+│   └── auth.py
 │   └── student.py
 │   └── activity.py
 │   └── question.py
@@ -107,6 +111,7 @@ app/
 │   └── test_student.py
 │   └── test_activity.py
 │   └── test_question.py
+│   └── test_answers.py
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt

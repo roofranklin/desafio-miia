@@ -3,3 +3,4 @@
 /app/routers/__pycache__
 /app/models/__pycache__
 /app/schemas/__pycache__
+/app/tests/__pycache__

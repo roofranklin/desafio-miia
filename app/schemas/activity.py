@@ -1,17 +1,16 @@
-from datetime import datetime
-from typing import List, Optional
 from pydantic import BaseModel
+from typing import Optional
 
 class ActivityBase(BaseModel):
-    name: str
-    start_date: Optional[datetime] = None
-    duration_minutes: int
+    title: str
+    description: Optional[str] = None
 
 class ActivityCreate(ActivityBase):
-    pass
-
-class ActivityOut(ActivityBase):
-    id: int
     student_id: int
+
+class ActivityResponse(ActivityBase):
+    id: int
+    is_completed: bool
+
     class Config:
         orm_mode = True

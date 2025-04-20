@@ -1,22 +1,33 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from typing import List
+from app import models, schemas
+from app.database import get_db
 
-from .. import models, schemas, database
+router = APIRouter(prefix="/activity")
 
-router = APIRouter(prefix="/activities", tags=["Activities"])
+@router.get("/{id}", response_model=schemas.ActivityResponse)
+def get_activity(id: int, db: Session = Depends(get_db)):
+    activity = db.query(models.Activity).filter(models.Activity.id == id).first()
+    if not activity:
+        raise HTTPException(status_code=404, detail="Atividade não encontrada")
+    return activity
 
-@router.post("/", response_model=schemas.activity.ActivityOut)
-def create_activity(activity: schemas.activity.ActivityCreate, student_id: int, db: Session = Depends(database.get_db)):
-    student = db.query(models.student.Student).filter_by(id=student_id).first()
-    if not student:
-        raise HTTPException(status_code=404, detail="Student not found")
-    new_activity = models.activity.Activity(**activity.dict(), student_id=student_id)
-    db.add(new_activity)
+@router.patch("/{id}", response_model=schemas.ActivityResponse)
+def update_activity(id: int, db: Session = Depends(get_db)):
+    activity = db.query(models.Activity).filter(models.Activity.id == id).first()
+    if not activity:
+        raise HTTPException(status_code=404, detail="Atividade não encontrada")
+    activity.is_completed = False
     db.commit()
-    db.refresh(new_activity)
-    return new_activity
+    db.refresh(activity)
+    return activity
 
-@router.get("/", response_model=List[schemas.activity.ActivityOut])
-def list_activities(db: Session = Depends(database.get_db)):
-    return db.query(models.activity.Activity).all()
+@router.post("/{id}", response_model=schemas.ActivityResponse)
+def complete_activity(id: int, db: Session = Depends(get_db)):
+    activity = db.query(models.Activity).filter(models.Activity.id == id).first()
+    if not activity:
+        raise HTTPException(status_code=404, detail="Atividade não encontrada")
+    activity.is_completed = True
+    db.commit()
+    db.refresh(activity)
+    return activity
