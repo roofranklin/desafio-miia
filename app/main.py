@@ -9,6 +9,6 @@ app = FastAPI(title="API do projeto MIIA", version="1.0.0")
 
 # Inclui as rotas
 app.include_router(auth.router, tags=["Autenticação"])
-app.include_router(student.router, tags=["Lista atividades de um aluno"])
-app.include_router(activity.router, tags=["Detalhe da atividade"])
-app.include_router(question.router, tags=["Lista questões / Detalhe da questão"])
+app.include_router(student.router, tags=["Detalhes do Aluno"])
+app.include_router(activity.router, tags=["Detalhes da Atividade"])
+app.include_router(question.router, tags=["Detalhes da Questão"])

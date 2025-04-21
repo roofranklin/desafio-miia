@@ -4,9 +4,6 @@ from app import models, schemas
 from app.database import get_db
 
 router = APIRouter(prefix="/question")
-@router.get("s/{activity_id}", response_model=list[schemas.QuestionResponse])
-def get_questions(activity_id: int, db: Session = Depends(get_db)):
-    return db.query(models.Question).filter(models.Question.activity_id == activity_id).all()
 
 @router.get("/{id}", response_model=schemas.QuestionResponse)
 def get_question(id: int, db: Session = Depends(get_db)):

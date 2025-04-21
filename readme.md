@@ -74,13 +74,12 @@ Clique [aqui](database-model.md) para visualizar a modelagem completa.
 | Método | Rota                            | Descrição                                             |
 |--------|---------------------------------|-------------------------------------------------------|
 | POST   | /auth                           | Aluno autenticar na plataforma                        |
+| GET    | /student/{id}                   | Detalhes de um aluno                                  |
 | GET    | /activity/{id}                  | Detalhes de uma atividade                             |
-| GET    | /activities/{student_id}        | Lista de atividades de um aluno                       |
-| GET    | /question/{id}                  | Detalhes de uma questão                               |
-| GET    | /questions/{activity_id}        | Lista questões de uma atividade                       |
-| POST   | /question/{id}                  | Envia a resposta de uma questão                       |
 | PATCH  | /activity/{id}                  | Salva as alterações do andamento da atividade         |
 | POST   | /activity/{id}                  | Envia todas as respostas e conclui a atividade        |
+| GET    | /question/{id}                  | Detalhes de uma questão                               |
+| POST   | /question/{id}                  | Envia a resposta de uma questão                       |
 
 Conforme mencionado acima a documentação completa dos endpoints está em http://localhost:8000/docs
 

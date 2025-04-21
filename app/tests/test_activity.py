@@ -17,7 +17,7 @@ def test_create_activity():
         "duration": 60
     }
 
-    response = client.post(f"/activities/?student_id={student_id}", json=activity_data)
+    response = client.post(f"/student/?id={student_id}", json=activity_data)
     assert response.status_code == 200
     assert response.json()["name"] == "Atividade 1"
 

@@ -7,6 +7,6 @@ class Question(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     text = Column(String, nullable=False)
-    activity_id = Column(Integer, ForeignKey("activities.id"))
+    activity_id = Column(Integer, ForeignKey("student.id"))
 
     activity = relationship("Activity", backref="questions")

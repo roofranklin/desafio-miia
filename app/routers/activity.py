@@ -12,9 +12,9 @@ def get_activity(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Atividade não encontrada")
     return activity
 
-@router.patch("/{id}", response_model=schemas.ActivityResponse)
-def update_activity(id: int, db: Session = Depends(get_db)):
-    activity = db.query(models.Activity).filter(models.Activity.id == id).first()
+@router.patch("/{id}", response_model=schemas.ActivityUpdateResponse)
+def update_activity(data: schemas.ActivityBase, db: Session = Depends(get_db)):
+    activity = db.query(models.Activity).filter(models.Activity.id == data.id).first()
     if not activity:
         raise HTTPException(status_code=404, detail="Atividade não encontrada")
     activity.is_completed = False
@@ -22,9 +22,9 @@ def update_activity(id: int, db: Session = Depends(get_db)):
     db.refresh(activity)
     return activity
 
-@router.post("/{id}", response_model=schemas.ActivityResponse)
-def complete_activity(id: int, db: Session = Depends(get_db)):
-    activity = db.query(models.Activity).filter(models.Activity.id == id).first()
+@router.post("/{id}", response_model=schemas.ActivityCreateResponse)
+def complete_activity(data: schemas.ActivityBase, db: Session = Depends(get_db)):
+    activity = db.query(models.Activity).filter(models.Activity.id == data.id).first()
     if not activity:
         raise HTTPException(status_code=404, detail="Atividade não encontrada")
     activity.is_completed = True

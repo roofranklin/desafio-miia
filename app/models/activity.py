@@ -3,12 +3,12 @@ from sqlalchemy.orm import relationship
 from app.database import Base
 
 class Activity(Base):
-    __tablename__ = "activities"
+    __tablename__ = "student"
 
-    id = Column(Integer, primary_key=True, index=True)
+    activity_id = Column(Integer, primary_key=True, index=True)
     title = Column(String, nullable=False)
     description = Column(String)
-    student_id = Column(Integer, ForeignKey("students.id"))
+    id = Column(Integer, ForeignKey("students.id"))
     is_completed = Column(Boolean, default=False)
 
-    student = relationship("Student", backref="activities")
+    student = relationship("Student", backref="student")
