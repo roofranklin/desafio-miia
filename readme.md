@@ -85,6 +85,32 @@ Conforme mencionado acima a documentação completa dos endpoints está em http:
 
 ---
 
+## Casos de Teste + Implementação (para 2 rotas)
+
+### POST /auth
+**Casos de teste:**
+
+- ✅ Inserir e-mail e senha válidos.
+- ❌ Inserir e-mail incorreto.
+- ❌ Inserir senha incorreto.
+- ❌ Submeter faltando preencher campo e-mail
+- ❌ Submeter faltando preencher campo senha
+
+### POST /activity/{id}    
+**Casos de teste:**
+
+- ✅ Enviar a requisição com todos os elementos preenchidos.
+- ❌ Tentar submeter com objeto em branco.
+- ❌ Tentar submeter com algum parâmetro em branco.
+- ❌ Tentar submeter com usuário não-logado.
+
+---
+
+## Diagrama da Arquitetura
+![Diagrama da arquitetura](./diagrama-miia.png)
+
+---
+
 ## Estrutura de pastas simplificada
 ```bash
 app/
