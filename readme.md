@@ -12,6 +12,16 @@ Este projeto é construído em **Python**, com a aplicação rodando em **FastAP
 
 ---
 
+## É novo por aqui?
+Entre [aqui](onboarding.md) e entenda quais os próximos passos em que você pode colaborar.
+
+---
+
+## Melhores práticas
+Clicando [aqui](best-practices.md) você terá acesso aos nossos padrões de desenvolvimento para que a equipe tenha uma entrega fluida e de qualidade. 
+
+---
+
 ## 🚀 Tecnologias Utilizadas
 
 - [Docker](https://www.docker.com/)
