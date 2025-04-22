@@ -25,6 +25,7 @@ services:
       - db
     environment:
       DATABASE_URL: postgresql+psycopg2://miia_user:miia_pass@db:5432/miia_db
+      PYTHONPATH: /code
 
 volumes:
   postgres_data:
